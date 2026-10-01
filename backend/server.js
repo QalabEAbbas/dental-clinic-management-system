@@ -4,7 +4,10 @@ const cors = require('cors');
 require('dotenv').config();
 
 const db = require('./src/config/database');
+
 const doctorRoutes = require('./src/routes/doctorRoutes');
+const appointmentRoutes = require('./src/routes/appointmentRoutes');
+const dashboardRoutes = require('./src/routes/dashboardRoutes');
 
 const app = express();
 
@@ -12,8 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/doctors', doctorRoutes);
-
-
+app.use('/api/appointments', appointmentRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 app.get('/api/health', async (req, res) => {
     try {
