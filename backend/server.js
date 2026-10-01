@@ -1,13 +1,19 @@
+const errorHandler = require('./src/middleware/errorHandler');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
 const db = require('./src/config/database');
+const doctorRoutes = require('./src/routes/doctorRoutes');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/doctors', doctorRoutes);
+
+
 
 app.get('/api/health', async (req, res) => {
     try {
@@ -28,6 +34,7 @@ app.get('/api/health', async (req, res) => {
     }
 });
 
+app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
